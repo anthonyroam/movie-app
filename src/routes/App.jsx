@@ -1,11 +1,12 @@
 import React from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
-import { Layout } from '../components/Layout';
+import { Layout } from '../components/container/Layout';
 import { AppProvider } from '../context/AppContext';
-import { Home } from "../container/Home";
-import { TrendingMovies } from '../container/TrendingMovies';
-import { Categories } from "../container/Categories";
+import { Home } from '../pages/home/Home';
+import { TrendingDisplay } from '../pages/display/TrendingDisplay';
+import { CategoriesDisplay } from '../pages/display/CategoriesDisplay';
+import { Search } from '../pages/Search/Search';
 
 const App = () => {
   return (
@@ -13,10 +14,14 @@ const App = () => {
       <BrowserRouter>
         <Layout>
           <Routes>
-            <Route path="/" element={<Home />} />  
-            <Route path="/trending-movies" element={<TrendingMovies />} />
-            <Route path="/categories/:id/:name" element={<Categories />} />
-          </Routes>  
+            <Route path="/" element={<Home />} />
+            <Route path="/trending-movies" element={<TrendingDisplay />} />
+            <Route
+              path="/categories/:id/:name"
+              element={<CategoriesDisplay />}
+            />
+            <Route path="/search" element={<Search />} />
+          </Routes>
         </Layout>
       </BrowserRouter>
     </AppProvider>

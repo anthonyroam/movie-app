@@ -1,68 +1,84 @@
-import React, { useState } from "react";
-import { api } from "../utils/apiInstance";
-import { randomNumber } from "../utils/randomNumber";
+import { useState } from 'react';
+import api from '../utils/apiInstance';
+import randomNumber from '../utils/randomNumber';
 
 const useData = () => {
-    const [trendingMovies, setTrendingMovies] = useState([]);
-    const [randomMovie, setRandomMovie] = useState("");
-    const [categories, setCategories] = useState([])
-    const [category, setCategory] = useState([]);
+  const [trendingMovies, setTrendingMovies] = useState([]);
+  const [randomMovie, setRandomMovie] = useState('');
+  const [categories, setCategories] = useState([]);
+  const [category, setCategory] = useState([]);
+  const [movie, setMovie] = useState({
+    selectedMovie: {},
+    isSelected: false,
+  });
+  const [searchValue, setSearchValue] = useState([]);
 
-    const getTrendingMovies = async () => {
-        const { data } = await api("trending/movie/day");
-        const results = await data.results
-        // console.log(results)
-        setTrendingMovies(results);
-    };
+  const getTrendingMovies = async () => {
+    const { data } = await api('trending/movie/day');
+    const { results } = await data;
 
-    const getRandomMovie = async () => {
-        const { data } = await api("trending/movie/day") 
-        const results = await data.results
-        setRandomMovie(results[randomNumber()]);
-    };
+    setTrendingMovies(results);
+  };
 
-    const getCategories = async () => {
-        const { data } = await api("genre/movie/list");
-        // console.log(data);
-        const { genres } = data;
-        setCategories(genres);
-    }
+  const getRandomMovie = async () => {
+    const { data } = await api('trending/movie/day');
+    const { results } = await data;
 
-    const getCategory = async (id) => {
-        const { data } = await api(`discover/movie`, {
-            params: {
-                "with_genres": id
-            }
-        });
-        const { results } = data;
-        // console.log(results);
-        setCategory(results);
-    }
-    const [ movie, setMovie ] = useState({
-        selectedMovie: {},
-        isSelected: false,
+    setRandomMovie(results[randomNumber()]);
+  };
+
+  const getCategories = async () => {
+    const { data } = await api('genre/movie/list');
+    const { genres } = data;
+
+    setCategories(genres);
+  };
+
+  const getCategory = async (id) => {
+    const { data } = await api(`discover/movie`, {
+      params: {
+        with_genres: id,
+      },
     });
+    const { results } = data;
 
-    const selectMovie = (selectedMovie) => {
-        setMovie({
-            selectedMovie,
-            isSelected: true,
-        })
-    }
+    setCategory(results);
+  };
 
-    return {
-        getTrendingMovies,
-        trendingMovies,
-        getRandomMovie,
-        randomMovie,
-        getCategories,
-        categories,
-        category,
-        getCategory,
-        selectMovie,
-        movie,
-        setMovie,
-    }
-}
+  const selectMovie = (selectedMovie) => {
+    setMovie({
+      selectedMovie,
+      isSelected: true,
+    });
+  };
 
-export { useData };
+  const searchMovie = async (query) => {
+    const { data } = await api('search/movie', {
+      params: {
+        query,
+      },
+    });
+    const { results } = data;
+
+    setSearchValue(results);
+    // console.log(results)
+  };
+
+  return {
+    getTrendingMovies,
+    trendingMovies,
+    getRandomMovie,
+    randomMovie,
+    getCategories,
+    categories,
+    getCategory,
+    category,
+    selectMovie,
+    movie,
+    setMovie,
+    searchMovie,
+    searchValue,
+  };
+};
+
+export default useData;
