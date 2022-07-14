@@ -7,6 +7,7 @@ import { PageContainer } from '../../components/container/PageContainer';
 import { Navbar } from '../../components/container/Navbar';
 import { IoChevronBack } from 'react-icons/io5';
 import { motion, AnimatePresence } from 'framer-motion';
+import { MotionContainer } from '../../components/container/MotionContainer';
 
 const TrendingDisplay = () => {
   const { trendingMovies, getTrendingMovies, selectMovie } =
@@ -18,22 +19,15 @@ const TrendingDisplay = () => {
   }, []);
 
   return (
-    <AnimatePresence>
-      <motion.div
-        initial={{ x: '100%' }}
-        animate={{ x: 0 }}
-        exit={{ x: '100%' }}
-        transition={{ duration: 0.3 }}
-      >
-        <PageContainer>
-          <Navbar opacity={true}>
-            <IoChevronBack />
-          </Navbar>
-          <DisplayTitle>Trending</DisplayTitle>
-          <Display moviesArray={trendingMovies} handleClick={selectMovie} />
-        </PageContainer>
-      </motion.div>
-    </AnimatePresence>
+    <MotionContainer>
+      <PageContainer>
+        <Navbar opacity={true}>
+          <IoChevronBack />
+        </Navbar>
+        <DisplayTitle>Trending</DisplayTitle>
+        <Display moviesArray={trendingMovies} handleClick={selectMovie} />
+      </PageContainer>
+    </MotionContainer>
   );
 };
 

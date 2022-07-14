@@ -17,7 +17,7 @@ const Layout = ({ children }) => {
   };
 
   return (
-    <div className="min-h-screen h-full w-full bg-dark-blue font-inter">
+    <div className="min-h-screen h-full w-full bg-dark-blue font-inter  overflow-x-hidden">
       <main>{children}</main>
       <Footer />
       <AnimatePresence>

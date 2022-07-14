@@ -24,19 +24,20 @@ function Modal({ setOpenModal }) {
       >
         My list
       </Link>
-      {categories.map((categorie) => (
-        <div
-          className="w-full h-auto text-center py-2 transition-colors hover:text-gray-400 md:text-2xl"
-          key={categorie.id}
-        >
-          <Link
-            to={`/categories/${categorie.id}/${categorie.name}`}
-            onClick={closeModal}
+      {!!categories.length &&
+        categories.map((categorie) => (
+          <div
+            className="w-full h-auto text-center py-2 transition-colors hover:text-gray-400 md:text-2xl"
+            key={categorie.id}
           >
-            {categorie.name}
-          </Link>
-        </div>
-      ))}
+            <Link
+              to={`/categories/${categorie.id}/${categorie.name}`}
+              onClick={closeModal}
+            >
+              {categorie.name}
+            </Link>
+          </div>
+        ))}
       <div className="fixed bottom-10">
         <RoundPrimaryButton onClick={closeModal}>
           <IoClose />

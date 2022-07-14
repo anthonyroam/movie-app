@@ -6,6 +6,7 @@ import { AppContext } from '../../context/AppContext';
 import { Display } from '../../components/container/Display';
 import { SearchBar } from '../../components/ui/SearchBar';
 import { useNavigate } from 'react-router-dom';
+import { MotionContainer } from '../../components/container/MotionContainer';
 
 const Search = () => {
   const { searchMovie, searchValue, selectMovie, setSearchValue } =
@@ -26,16 +27,18 @@ const Search = () => {
   };
 
   return (
-    <PageContainer>
-      <div
-        className="flex items-center w-full h-12 px-8 text-2xl text-cream"
-        onClick={navigate}
-      >
-        <IoChevronBack />
-      </div>
-      <SearchBar handleChange={handleChange} />
-      <Display moviesArray={searchValue} handleClick={selectMovie} />
-    </PageContainer>
+    <MotionContainer>
+      <PageContainer>
+        <div
+          className="flex items-center w-full h-12 px-8 text-2xl text-cream"
+          onClick={navigate}
+        >
+          <IoChevronBack />
+        </div>
+        <SearchBar handleChange={handleChange} />
+        <Display moviesArray={searchValue} handleClick={selectMovie} />
+      </PageContainer>
+    </MotionContainer>
   );
 };
 
