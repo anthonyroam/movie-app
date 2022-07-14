@@ -13,7 +13,7 @@ const Home = () => {
     <PageContainer>
       <Navbar opacity={opacity}>
         <img
-          className="h-10 w-full"
+          className="h-10 w-full md:h-14"
           src="https://res.cloudinary.com/ds8efp758/image/upload/v1657407227/logo-movie-xd_ego4tv.png"
           alt="Logo.png"
         />

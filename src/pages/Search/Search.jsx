@@ -8,15 +8,20 @@ import { SearchBar } from '../../components/ui/SearchBar';
 import { useNavigate } from 'react-router-dom';
 
 const Search = () => {
-  const { searchMovie, searchValue, selectMovie } = useContext(AppContext);
-  const navigate = useNavigate();
+  const { searchMovie, searchValue, selectMovie, setSearchValue } =
+    useContext(AppContext);
+  const history = useNavigate();
+  const navigate = () => {
+    history('/');
+    setSearchValue([]);
+  };
 
   const handleChange = (event) => {
     const value = event.target.value;
 
-    if (value.length > 3) {
-      searchMovie(value);
-      console.log(value);
+    if (value.length >= 3) return searchMovie(value);
+    else {
+      setSearchValue([]);
     }
   };
 
@@ -24,7 +29,7 @@ const Search = () => {
     <PageContainer>
       <div
         className="flex items-center w-full h-12 px-8 text-2xl text-cream"
-        onClick={() => navigate('/')}
+        onClick={navigate}
       >
         <IoChevronBack />
       </div>

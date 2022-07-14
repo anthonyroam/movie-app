@@ -15,7 +15,7 @@ const useIntersectionObserver = () => {
   };
 
   const options = {
-    threshold: 0.25,
+    threshold: 0.75,
   };
 
   useEffect(() => {

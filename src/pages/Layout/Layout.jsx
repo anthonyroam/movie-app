@@ -1,8 +1,8 @@
 import React, { useContext } from 'react';
 import { AppContext } from '../../context/AppContext';
 
-import { Footer } from './Footer';
-import { Overview } from './Overview';
+import { Footer } from '../../components/container/Footer';
+import { MovieOverview } from './MovieOverview';
 
 const Layout = ({ children }) => {
   const { movie } = useContext(AppContext);
@@ -12,7 +12,7 @@ const Layout = ({ children }) => {
     <div className="min-h-screen h-full w-full bg-dark-blue font-inter">
       <main>{children}</main>
       <Footer />
-      {!!isSelected && <Overview />}
+      {!!isSelected && <MovieOverview />}
     </div>
   );
 };

@@ -1,7 +1,7 @@
 import React from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
-import { Layout } from '../components/container/Layout';
+import { Layout } from '../pages/Layout/Layout';
 import { AppProvider } from '../context/AppContext';
 import { Home } from '../pages/home/Home';
 import { TrendingDisplay } from '../pages/display/TrendingDisplay';

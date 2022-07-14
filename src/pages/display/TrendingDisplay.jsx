@@ -12,6 +12,7 @@ const TrendingDisplay = () => {
     useContext(AppContext);
 
   useEffect(() => {
+    window.scrollTo(0, 0);
     getTrendingMovies();
   }, []);
 

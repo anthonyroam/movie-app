@@ -78,6 +78,7 @@ const useData = () => {
     setMovie,
     searchMovie,
     searchValue,
+    setSearchValue,
   };
 };
 

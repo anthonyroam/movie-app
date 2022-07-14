@@ -16,13 +16,19 @@ function Modal({ setOpenModal }) {
   const closeModal = () => setOpenModal(false);
 
   return ReactDOM.createPortal(
-    <div className="fixed z-50 top-0 h-screen w-full flex flex-col items-center pt-10 pb-24 overflow-scroll bg-gray-900 bg-opacity-95 text-cream">
-      <h3 className="py-2 text-2xl font-bold">Categories</h3>
-      <Link to="/my-list" className="py-2">
+    <div className="fixed z-50 top-0 h-screen w-full flex flex-col items-center pt-10 pb-24 overflow-y-scroll bg-gray-900 bg-opacity-95 text-cream">
+      <h3 className="py-2 text-2xl font-bold md:text-5xl">Categories</h3>
+      <Link
+        to="/my-list"
+        className="py-2 transition-colors hover:text-gray-400 md:text-2xl"
+      >
         My list
       </Link>
       {categories.map((categorie) => (
-        <div className="w-full h-auto text-center py-2" key={categorie.id}>
+        <div
+          className="w-full h-auto text-center py-2 transition-colors hover:text-gray-400 md:text-2xl"
+          key={categorie.id}
+        >
           <Link
             to={`/categories/${categorie.id}/${categorie.name}`}
             onClick={closeModal}

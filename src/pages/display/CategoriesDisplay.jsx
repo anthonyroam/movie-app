@@ -13,6 +13,7 @@ const CategoriesDisplay = () => {
   const { category, getCategory, selectMovie } = useContext(AppContext);
 
   useEffect(() => {
+    window.scrollTo(0, 0);
     getCategory(id);
   }, [id]);
 
