@@ -1,4 +1,5 @@
 import React from 'react';
+import { motion } from 'framer-motion';
 
 import { RoundPrimaryButton } from '../ui/RoundPrimaryButton';
 import { RoundSecondaryButton } from '../ui/RoundSecondaryButton';
@@ -10,7 +11,13 @@ import { Poster } from './Poster';
 
 const Overview = ({ movie, closeOverview }) => {
   return (
-    <div className="fixed z-50 bottom-0 w-full h-auto py-4 px-8 space-y-4 rounded-t-lg bg-very-dark-blue lg:w-auto lg:bottom-1/2 lg:right-1/2 lg:translate-x-1/2 lg:translate-y-1/2 lg:rounded-lg">
+    <motion.div
+      className="fixed z-50 right-1/2 translate-x-1/2 bottom-0 w-full h-auto py-4 px-8 space-y-4 rounded-t-lg bg-very-dark-blue lg:w-auto lg:bottom-1/2 lg:right-1/2 lg:translate-x-1/2 lg:translate-y-1/2 lg:rounded-lg"
+      initial={{ y: 325, x: '50%', opacity: 0 }}
+      animate={{ y: 0, x: '50%', opacity: 1 }}
+      exit={{ y: 325, x: '50%', opacity: 0 }}
+      transition={{ duration: 0.3 }}
+    >
       <div className="flex items-center justify-center h-fit gap-4">
         <div className="min-w-[150px] w-[150px]  ">
           <img
@@ -32,7 +39,7 @@ const Overview = ({ movie, closeOverview }) => {
           </div>
           <div className="flex items-center gap-4 text-sm text-gray-400 md:text-lg">
             <p>{movie.release_date} </p>
-            <div className="flex items-center gap-1">
+            <div className="flex items-center gap-2 h-4 md:h-5 ">
               <p>{movie.vote_average.toFixed(2)} </p>
               <div className="h-full text-yellow-400">
                 <FaStar />
@@ -58,7 +65,7 @@ const Overview = ({ movie, closeOverview }) => {
           <MdShare />
         </RoundSecondaryButton>
       </div>
-    </div>
+    </motion.div>
   );
 };
 
