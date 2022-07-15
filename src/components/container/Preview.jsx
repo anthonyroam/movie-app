@@ -6,6 +6,7 @@ import Slider from 'react-slick';
 import { TertiaryButton } from '../ui/TertiaryButton';
 import { Poster } from './Poster';
 import sliderSettings from '../../utils/sliderSettings';
+import { PreviewSkeleton } from './PreviewSkeleton';
 
 const Preview = ({ title, moviesArray, handleClick, navigate }) => {
   return (
@@ -14,12 +15,14 @@ const Preview = ({ title, moviesArray, handleClick, navigate }) => {
         <h3 className="text-2xl font-bold lg:text-3xl">{title}</h3>
         <TertiaryButton onClick={navigate}>See all</TertiaryButton>
       </div>
-      {!!moviesArray.length && (
+      {!!moviesArray.length ? (
         <Slider {...sliderSettings}>
           {moviesArray.map((movie) => (
             <Poster movie={movie} handleClick={handleClick} key={movie.id} />
           ))}
         </Slider>
+      ) : (
+        <PreviewSkeleton />
       )}
     </section>
   );

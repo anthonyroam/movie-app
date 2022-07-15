@@ -1,13 +1,12 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 
-import { RoundPrimaryButton } from '../ui/RoundPrimaryButton';
-import { RoundSecondaryButton } from '../ui/RoundSecondaryButton';
+import { RoundPrimaryButton } from '../../components/ui/RoundPrimaryButton';
+import { RoundSecondaryButton } from '../../components/ui/RoundSecondaryButton';
 import { IoClose } from 'react-icons/io5';
 import { IoMdAdd } from 'react-icons/io';
 import { MdPlayArrow, MdDownload, MdShare } from 'react-icons/md';
 import { FaStar } from 'react-icons/fa';
-import { Poster } from './Poster';
 
 const Overview = ({ movie, closeOverview }) => {
   return (
@@ -19,15 +18,20 @@ const Overview = ({ movie, closeOverview }) => {
       transition={{ duration: 0.3 }}
     >
       <div className="flex items-center justify-center h-fit gap-4">
-        <div className="min-w-[150px] w-[150px]  ">
-          <img
-            src={
-              !!movie && `https://image.tmdb.org/t/p/w200/${movie.poster_path}`
-            }
-            alt={movie.title}
-            className="rounded-lg shadow-md"
-          />
-        </div>
+        {!!movie ? (
+          <div className="min-w-[150px] w-[150px]  ">
+            <img
+              src={
+                !!movie &&
+                `https://image.tmdb.org/t/p/w200/${movie.poster_path}`
+              }
+              alt={movie.title}
+              className="rounded-lg shadow-md"
+            />
+          </div>
+        ) : (
+          <div className="aspect-[27/41] animate-pulse min-w-[125px] w-[125px] bg-dark-blue md:min-w-[150px] md:w-[150px] lg:min-w-[200px] lg:w-[200px] rounded-lg" />
+        )}
         <div className="space-y-2 h-fit">
           <div className="flex items-center justify-between gap-4">
             <h3 className="w-4/6 text-cream font-semibold md:text-xl">
