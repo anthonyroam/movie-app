@@ -1,21 +1,19 @@
 import { useEffect, useRef, useState } from 'react';
 
-const useIntersectionObserver = () => {
+const useIntersectionObserver = (options) => {
   const containerRef = useRef(null);
-  const [opacity, setOpacity] = useState(false);
+  const [isVisible, setIsVisible] = useState(false);
 
   const callback = (entries) => {
     const [entry] = entries;
 
     if (entry.isIntersecting) {
-      setOpacity(false);
-    } else {
-      setOpacity(true);
+      setIsVisible(true);
     }
-  };
 
-  const options = {
-    threshold: 0.75,
+    if (entry.target.id === 'banner' && !entry.isIntersecting) {
+      setIsVisible(false);
+    }
   };
 
   useEffect(() => {
@@ -24,9 +22,13 @@ const useIntersectionObserver = () => {
     if (containerRef.current) {
       observer.observe(containerRef.current);
     }
-  }, []);
 
-  return [containerRef, opacity];
+    return () => {
+      if (containerRef.current) observer.unobserve(containerRef);
+    };
+  }, [containerRef]);
+
+  return [containerRef, isVisible];
 };
 
 export default useIntersectionObserver;

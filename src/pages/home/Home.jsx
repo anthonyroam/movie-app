@@ -7,11 +7,11 @@ import { Navbar } from '../../components/container/Navbar';
 import useIntersectionObserver from '../../hooks/useIntersectionObserver';
 
 const Home = () => {
-  const [containerRef, opacity] = useIntersectionObserver();
+  const [containerRef, isVisible] = useIntersectionObserver({ threshold: 0.9 });
 
   return (
     <PageContainer>
-      <Navbar opacity={opacity}>
+      <Navbar isVisible={isVisible}>
         <img
           className="h-10 w-full md:h-14"
           src="https://res.cloudinary.com/ds8efp758/image/upload/v1657407227/logo-movie-xd_ego4tv.png"

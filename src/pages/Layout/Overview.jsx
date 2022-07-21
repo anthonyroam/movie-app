@@ -3,9 +3,13 @@ import { motion } from 'framer-motion';
 
 import { RoundPrimaryButton } from '../../components/ui/RoundPrimaryButton';
 import { RoundSecondaryButton } from '../../components/ui/RoundSecondaryButton';
-import { IoClose } from 'react-icons/io5';
-import { IoMdAdd } from 'react-icons/io';
-import { MdPlayArrow, MdDownload, MdShare } from 'react-icons/md';
+import { IoClose as Close } from 'react-icons/io5';
+import { IoMdAdd as Add } from 'react-icons/io';
+import {
+  MdPlayArrow as PlayArrow,
+  MdDownload as Download,
+  MdShare as Share,
+} from 'react-icons/md';
 import { FaStar } from 'react-icons/fa';
 
 const Overview = ({ movie, closeOverview }) => {
@@ -38,7 +42,7 @@ const Overview = ({ movie, closeOverview }) => {
               {movie.title}
             </h3>
             <RoundPrimaryButton onClick={closeOverview}>
-              <IoClose />
+              <Close />
             </RoundPrimaryButton>
           </div>
           <div className="flex items-center gap-4 text-sm text-gray-400 md:text-lg">
@@ -57,16 +61,16 @@ const Overview = ({ movie, closeOverview }) => {
       </div>
       <div className="flex items-center justify-around h-1/5 lg:gap-16 lg:justify-center">
         <RoundPrimaryButton>
-          <MdPlayArrow />
+          <PlayArrow />
         </RoundPrimaryButton>
         <RoundSecondaryButton>
-          <MdDownload />
+          <Download />
         </RoundSecondaryButton>
         <RoundSecondaryButton>
-          <IoMdAdd />
+          <Add />{' '}
         </RoundSecondaryButton>
         <RoundSecondaryButton>
-          <MdShare />
+          <Share />
         </RoundSecondaryButton>
       </div>
     </motion.div>

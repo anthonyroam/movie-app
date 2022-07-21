@@ -7,24 +7,32 @@ const useData = () => {
   const [randomMovie, setRandomMovie] = useState('');
   const [categories, setCategories] = useState([]);
   const [category, setCategory] = useState([]);
+  const [searchValue, setSearchValue] = useState([]);
+  const [error, setError] = useState(false);
   const [movie, setMovie] = useState({
     selectedMovie: {},
     isSelected: false,
   });
-  const [searchValue, setSearchValue] = useState([]);
 
   const getTrendingMovies = async () => {
-    const { data } = await api('trending/movie/day');
-    const { results } = await data;
+    try {
+      const { data } = await api('trending/movie/day');
+      const { results } = await data;
 
-    setTrendingMovies(results);
+      setTrendingMovies(results);
+    } catch {
+      setError(true);
+    }
   };
 
   const getRandomMovie = async () => {
-    const { data } = await api('trending/movie/day');
-    const { results } = await data;
-
-    setRandomMovie(results[randomNumber()]);
+    try {
+      const { data } = await api('trending/movie/day');
+      const { results } = await data;
+      setRandomMovie(results[randomNumber()]);
+    } catch {
+      setError(true);
+    }
   };
 
   const getCategories = async () => {
@@ -35,14 +43,18 @@ const useData = () => {
   };
 
   const getCategory = async (id) => {
-    const { data } = await api(`discover/movie`, {
-      params: {
-        with_genres: id,
-      },
-    });
-    const { results } = data;
+    try {
+      const { data } = await api(`discover/movie`, {
+        params: {
+          with_genres: id,
+        },
+      });
+      const { results } = data;
 
-    setCategory(results);
+      setCategory(results);
+    } catch {
+      setError(true);
+    }
   };
 
   const selectMovie = (selectedMovie) => {
@@ -61,7 +73,6 @@ const useData = () => {
     const { results } = data;
 
     setSearchValue(results);
-    // console.log(results)
   };
 
   return {
@@ -79,6 +90,7 @@ const useData = () => {
     searchMovie,
     searchValue,
     setSearchValue,
+    error,
   };
 };
 
