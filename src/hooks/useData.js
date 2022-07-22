@@ -1,4 +1,5 @@
-import { useState } from 'react';
+import axios from 'axios';
+import { useState, useRef } from 'react';
 import api from '../utils/apiInstance';
 import randomNumber from '../utils/randomNumber';
 
@@ -13,6 +14,8 @@ const useData = () => {
     selectedMovie: {},
     isSelected: false,
   });
+  const [page, setPage] = useState(1);
+  const totalPages = useRef();
 
   const getTrendingMovies = async () => {
     try {
@@ -42,16 +45,22 @@ const useData = () => {
     setCategories(genres);
   };
 
-  const getCategory = async (id) => {
+  const getCategory = async (id, page) => {
     try {
       const { data } = await api(`discover/movie`, {
         params: {
           with_genres: id,
+          page,
         },
       });
-      const { results } = data;
+      const { results, total_pages } = data;
 
-      setCategory(results);
+      if (page === 1) {
+        setCategory(results);
+        totalPages.current = total_pages;
+      } else {
+        setCategory((prev) => [...prev, ...results]);
+      }
     } catch {
       setError(true);
     }
@@ -64,15 +73,30 @@ const useData = () => {
     });
   };
 
-  const searchMovie = async (query) => {
-    const { data } = await api('search/movie', {
-      params: {
-        query,
-      },
-    });
-    const { results } = data;
+  const controller = new AbortController();
+  const searchMovie = async (query, page) => {
+    try {
+      const { data } = await api('search/movie', {
+        params: {
+          query,
+          page,
+        },
+        signal: controller.signal,
+      });
+      const { results, total_pages } = data;
 
-    setSearchValue(results);
+      if (page === 1) {
+        setSearchValue(results);
+        totalPages.current = total_pages;
+      } else {
+        setSearchValue((prev) => [...prev, ...results]);
+      }
+      // console.log(page)
+      // console.log(totalPages.current)
+      controller.abort();
+    } catch (error) {
+      if (axios.isCancel(error)) return;
+    }
   };
 
   return {
@@ -91,6 +115,9 @@ const useData = () => {
     searchValue,
     setSearchValue,
     error,
+    page,
+    setPage,
+    totalPages,
   };
 };
 

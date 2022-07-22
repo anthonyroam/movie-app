@@ -6,7 +6,7 @@ const useIntersectionObserver = (options) => {
 
   const callback = (entries) => {
     const [entry] = entries;
-
+    // console.log(entry)
     if (entry.isIntersecting) {
       setIsVisible(true);
     }

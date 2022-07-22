@@ -6,7 +6,6 @@ import { AppContext } from '../../context/AppContext';
 import { PageContainer } from '../../components/container/PageContainer';
 import { Navbar } from '../../components/container/Navbar';
 import { IoChevronBack } from 'react-icons/io5';
-import { motion, AnimatePresence } from 'framer-motion';
 import { MotionContainer } from '../../components/container/MotionContainer';
 
 const TrendingDisplay = () => {
@@ -19,15 +18,15 @@ const TrendingDisplay = () => {
   }, []);
 
   return (
-    <MotionContainer>
-      <PageContainer>
-        <Navbar opacity={true}>
-          <IoChevronBack />
-        </Navbar>
+    <PageContainer>
+      <Navbar opacity={true}>
+        <IoChevronBack />
+      </Navbar>
+      <MotionContainer>
         <DisplayTitle>Trending</DisplayTitle>
         <Display moviesArray={trendingMovies} handleClick={selectMovie} />
-      </PageContainer>
-    </MotionContainer>
+      </MotionContainer>
+    </PageContainer>
   );
 };
 

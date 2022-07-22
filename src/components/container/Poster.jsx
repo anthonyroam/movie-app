@@ -2,7 +2,7 @@ import React from 'react';
 import useIntersectionObserver from '../../hooks/useIntersectionObserver';
 import { PosterSkeleton } from './PosterSkeleton';
 
-const Poster = ({ movie, handleClick }) => {
+const Poster = ({ movie, handleClick, lastMovieRef }) => {
   const [containerRef, isVisible] = useIntersectionObserver({
     threshold: 0.25,
   });
@@ -20,6 +20,7 @@ const Poster = ({ movie, handleClick }) => {
           }
           alt={movie.title}
           className="rounded-lg shadow-md h-full w-full"
+          ref={lastMovieRef}
         />
       ) : (
         <PosterSkeleton />

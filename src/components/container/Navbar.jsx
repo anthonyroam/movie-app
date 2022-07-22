@@ -15,7 +15,7 @@ const Navbar = ({ children, isVisible }) => {
 
   return (
     <nav
-      className={`fixed z-50 flex items-center justify-between h-12 w-full px-6 text-cream bg-dark-blue transition-all md:h-16 lg:px-14 ${
+      className={`fixed z-50 flex items-center justify-between h-12 w-full px-6 text-cream bg-dark-blue transition-all duration-300 md:h-16 lg:px-14 ${
         !!isVisible ? 'bg-opacity-0' : `bg-opacity-80`
       } `}
     >

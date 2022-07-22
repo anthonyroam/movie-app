@@ -7,13 +7,16 @@ import { IoClose } from 'react-icons/io5';
 import { RoundPrimaryButton } from '../../components/ui/RoundPrimaryButton';
 
 function Modal({ setOpenModal }) {
-  const { categories, getCategories } = useContext(AppContext);
+  const { categories, getCategories, setPage } = useContext(AppContext);
 
   useEffect(() => {
     getCategories();
   }, []);
 
-  const closeModal = () => setOpenModal(false);
+  const closeModal = () => {
+    setOpenModal(false);
+    setPage(1);
+  };
 
   return ReactDOM.createPortal(
     <div className="fixed z-50 top-0 h-screen w-full flex flex-col items-center pt-10 pb-24 overflow-y-scroll bg-gray-900 bg-opacity-95 text-cream">
